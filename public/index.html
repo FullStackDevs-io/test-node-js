@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grains API Tester</title>
+</head>
+<body>
+    <h1>Grains API Tester</h1>
+    <div>
+        <h2>Get All Grains</h2>
+        <button id="getGrains">Fetch Grains</button>
+        <pre id="grainsOutput"></pre>
+    </div>
+    <div>
+        <h2>Update Grain Price</h2>
+        <label for="grainType">Grain Type:</label>
+        <input type="text" id="grainType" placeholder="e.g., wheat">
+        <label for="grainPrice">New Price:</label>
+        <input type="number" id="grainPrice" placeholder="e.g., 12.5">
+        <button id="updatePrice">Update Price</button>
+        <pre id="updateOutput"></pre>
+    </div>
+    <div>
+        <h2>Get Grain History</h2>
+        <label for="historyType">Grain Type:</label>
+        <input type="text" id="historyType" placeholder="e.g., wheat">
+        <button id="getHistory">Fetch History</button>
+        <pre id="historyOutput"></pre>
+    </div>
+    <script>
+        const API_BASE = 'http://localhost:3000/grains';
+
+        document.getElementById('getGrains').addEventListener('click', async () => {
+            const res = await fetch(`${API_BASE}`);
+            const data = await res.json();
+            document.getElementById('grainsOutput').textContent = JSON.stringify(data, null, 2);
+        });
+
+        document.getElementById('updatePrice').addEventListener('click', async () => {
+            const type = document.getElementById('grainType').value;
+            const price = parseFloat(document.getElementById('grainPrice').value);
+
+            const res = await fetch(`${API_BASE}/${type}/price`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ price }),
+            });
+
+            const data = await res.json();
+            document.getElementById('updateOutput').textContent = JSON.stringify(data, null, 2);
+        });
+
+        document.getElementById('getHistory').addEventListener('click', async () => {
+            const type = document.getElementById('historyType').value;
+            const res = await fetch(`${API_BASE}/${type}/history`);
+            const data = await res.json();
+            document.getElementById('historyOutput').textContent = JSON.stringify(data, null, 2);
+        });
+    </script>
+</body>
+</html>

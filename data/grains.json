@@ -1,0 +1,17 @@
+{
+  "grains": {
+    "wheat": {
+      "currentPrice": 12.5,
+      "history": [
+        {
+          "price": 12.5,
+          "timestamp": "2025-01-06T00:46:03.896Z"
+        }
+      ]
+    },
+    "corn": {
+      "currentPrice": 8.3,
+      "history": []
+    }
+  }
+}
