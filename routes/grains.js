@@ -10,14 +10,13 @@ let grainsData = require(dataPath);
 
 // Get all grains and their current prices
 router.get('/', (req, res) => {
-    // Validate the type and price parameters.
-    // Update the currentPrice of the specified grain.
-    // Add the updated price along with a timestamp to the history array.
-    // Save the updated grains data back to the mock database.
-    // Example history format:
+    // Transform grainsData.grains into an array of objects with type and currentPrice.
+    // Example response format:
     // {
-    //   "price": 12.0,
-    //   "timestamp": "2024-01-05T12:34:56Z"
+    //   "grains": [
+    //     { "type": "wheat", "currentPrice": 10.5 },
+    //     { "type": "corn", "currentPrice": 8.3 }
+    //   ]
     // }
     res.status(200).json({ message: 'GET /grains TODO' });
 });
